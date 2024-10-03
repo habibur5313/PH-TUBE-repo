@@ -24,3 +24,14 @@
 //             }
 
 // timeCount(3546346534)
+
+function convertToNumber(str) {
+                    if (str.endsWith('k')) {
+                        return parseFloat(str) * 1000;
+                    }
+                    return parseFloat(str);
+                }
+                
+                const result = convertToNumber("100k");
+                console.log(result); // 100000
+                

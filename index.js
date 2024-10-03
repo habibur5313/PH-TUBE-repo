@@ -20,8 +20,8 @@ const categoryLoader = () => {
                     .then(data => displayCategory(data.categories))
 }
 
-const videoLoader = () => {
-                    fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+const videoLoader = (searchText = "") => {
+                    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title= ${searchText} `)
                     .then(res => res.json())
                     .then(data => displayVideos(data.videos))
 }
@@ -120,7 +120,7 @@ const displayVideos = (videos) => {
                                               <p class="font-semibold text-xl text-gray-400">${item.authors[0].profile_name}<p/> 
                                                <p>${item.authors[0].verified === true ? '<img class="w-5" src="https://img.icons8.com/?size=48&id=98A4yZTt9abw&format=png"/>': ''}</p>
                                         </div>
-                                        <p>${item.others.views}</p>
+                                        <p id = "view" >${item.others.views}</p>
                                         <button onclick="VideoDetails('${item.video_id}')" class="py-2 rounded-xl text-xl text-white px-4 border bg-blue-500"> details</button> 
                                         </div>
                                        
@@ -146,7 +146,10 @@ const displayVideoDetails = (datas) => {
         
 }
    
-
+document.getElementById('search-input').addEventListener('keyup',(e) => {
+        videoLoader(e.target.value);
+       
+})
 
 categoryLoader()
 videoLoader()
